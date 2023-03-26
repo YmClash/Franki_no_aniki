@@ -1,12 +1,17 @@
 import discord
 import requests
 import socket
+import logging
 
+logging.basicConfig(level=logging.INFO)
 
 def ip_adresse() :
     hostname = socket.gethostname()
     ip_adresse = socket.gethostbyname(hostname)
     print(f'votre adresse IP est : {ip_adresse}')
+
+
+
 
 
 def create_connection():
