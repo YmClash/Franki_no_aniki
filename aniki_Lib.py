@@ -2,6 +2,11 @@ import discord
 import requests
 import socket
 import logging
+import webbrowser
+import os
+import sys
+
+
 
 logging.basicConfig(level=logging.INFO)
 
@@ -26,9 +31,9 @@ def create_connection():
         if database:
             database.close()
 
-from chatterbot import ChatBot
-from chatterbot.trainers import ChatterBotCorpusTrainer
-#
+# from chatterbot import ChatBot
+# from chatterbot.trainers import ChatterBotCorpusTrainer
+# #
 # # Création du chatbot
 # chatbot = ChatBot("MonChatbot")
 #

@@ -1,0 +1,53 @@
+* {
+
+}
+
+
+body{
+    background-color: rgb(22, 216, 207);
+}
+
+section.top {
+    padding: 60px;
+
+}
+.menu {
+    display: flex;
+    justify-content: space-around;
+    font-size: 2.5rem;
+
+
+}
+
+h1 {
+    text-align: center;
+    letter-spacing: 3px;
+    color: blueviolet;
+}
+
+.middle-page {
+    font-size: 1rem ;
+    line-height: 1.4;
+    color: gray;
+    letter-spacing: 0.012em;
+    padding: 50px;
+    background-color:violet;
+    display: flex;
+    flex-direction: column;
+    opacity: 0.6;
+}
+
+p {
+    letter-spacing: 2px;
+
+
+}
+.connexion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(26, 240, 41);
+    font-size: 20px;
+    width: 100px ;
+}

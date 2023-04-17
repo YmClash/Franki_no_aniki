@@ -7,37 +7,65 @@ import responses
 import quotes
 import os
 from dotenv import load_dotenv
+import logging
+import shoGun
 
 # This example requires the 'message_content' intent.
+load_dotenv()
 
+
+clee = os.getenv('DISCORD_API_KEY')
 
 intents = discord.Intents.default()
 intents.message_content = True
 
+
+
 client = discord.Client(intents=intents)
-
-load_dotenv()
-
-clee = os.getenv('DISCORD_API_KEY')
-if not clee:
-    raise ValueError('DISCORD API KEY is not difined in the .env file ')
-
-
-
 
 quotes = quotes.quotes
 
 
-# quotes = ["C'est dans le besoin qu'on reconnaît ses vrais amis.",
-#          "Il n'est pire aveugle que celui qui ne veut pas voir. Il n'est pire sourd que celui qui ne veut pas entendre.",
-#          "Les yeux ont toujours faim de voir.",
-#          "La patience est amère, mais son fruit est doux.",
-#          "A vouloir trop avoir, l'on perd tout.",
-#          "Quand la pauvreté entre par la porte, l'amour s'en va par la fenêtre.",
-#          "Donne ton amour à ta femme et donne ton secret à ta mère.",
-#          "Sagesse, beauté et gentillesse ne font bouillir aucun chaudron.",
-#          "Le mal retourne à celui qui le fait.",
-#          "Qui se nourrit d'attente risque de mourir de faim."]
+async def demande_gpt(prompt) :
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role" : "system", "content" : "You are a helpful assistant."},
+            {"role" : "user", "content" : prompt}
+        ],
+        max_tokens=500,
+        temperature=0.75,
+        top_p=1.0,
+        #stop =4,
+        frequency_penalty=0.0,
+        presence_penalty= 0.6
+    )
+
+    message = response.choices[0].message.content.strip()
+    return message
+
+
+async def demande_image(prompt):
+    response = openai.Image.create(
+        prompt=prompt,
+        n=1,
+        size = "1024x1024"
+    )
+
+    image_url = response['data'][0]['url']
+    return image_url
+
+        # #prompt=prompt,
+        # temperature=0.75,
+        # max_tokens=150,
+        # stop=None,
+        # #top_p=1,
+        # frequency_penalty=0.0,
+        # presence_penalty=0.6,
+    # )
+    # #
+    # message = response.choices[0].message.content.strip()
+    # return message
 
 
 def run_aniki() :
@@ -46,7 +74,7 @@ def run_aniki() :
 
 @client.event
 async def on_ready() :
-    print(f'We have logged in as {client.user}')
+    print(f'We have logged in as {client.user} SUPER!!!!!')
 
 
 @client.event
@@ -54,48 +82,38 @@ async def on_message(message) :
     if message.author == client.user :
         return
 
-    if message.content.startswith('hello') :
-        await message.channel.send('Hello!')
-
-    if message.content.startswith('cava') :
-        await message.channel.send('je vais bien  et vous ')
+    if message.content.startswith("quote") :
+        quote = random.choice(quotes)
+        await message.channel.send(str(quote))
 
     if message.content.startswith('roll 1') :
         roll = random.randint(1, 6)
-        await message.channel.send(str(roll))
-
-    if message.content.startswith("roll 2") :
-        roll = ([random.randint(0, 10) for i in range(2)])
-        await message.channel.send(str(roll))
-
-    if message.content.startswith("roll 3") :
-        roll = ([random.randint(0, 10) for i in range(3)])
-        await message.channel.send(str(roll))
-
-    if message.content.startswith("roll 4") :
-        roll = ([random.randint(0, 10) for i in range(4)])
-        await message.channel.send(str(roll))
-
-    if message.content.startswith("roll 10") :
-        roll = ([random.randint(0, 10) for i in range(10)])
         await message.channel.send(str(roll))
 
     if message.content.startswith("text") :
         text = lorem.sentence()
         await message.channel.send(str(text))
 
-    if message.content.startswith("quote") :
-        quote = random.choice(quotes)
-        await message.channel.send(str(quote))
+
+    franki_no_aniki_channel : discord.TextChannel = client.get_channel(1091814990329172080)
+    if message.content.startswith("/dismoi"):
+        prompt = message.content[11:]
+        response = await demande_gpt(prompt)
+        await franki_no_aniki_channel.send(content=response)
+
+    if message.content.startswith("/imagemoi"):
+        prompt= message.content[11:]
+        response = await demande_image(prompt)
+        await franki_no_aniki_channel.send(content=response)
 
 
-client.run(clee)
 
+@client.event
+async def on_member_join(member):
+    welcome_channel = client.get_channel(1072608076118630420)
+    await welcome_channel.send(content=f'Welcome to the  Mo^sJams Cave {member.display_name} !')
 
-
-
-
-
+client.run(clee, log_level=logging.INFO)
 
 """
 async def send_message(message, user_message, is_private) :
