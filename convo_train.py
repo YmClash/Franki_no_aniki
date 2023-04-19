@@ -98,9 +98,9 @@ classeur_image = reseau_Neurone().to('cpu')
 optimiseur = Adam(classeur_image.parameters(), lr=1e-3)
 perte_fonction = nn.CrossEntropyLoss()
 
-num_epoch = 300
+num_epoch = 10
 for epoch in range(num_epoch) :
-    for batch in dataset_2 :
+    for batch in dataset_2:
         x, y = batch
         x, y = x.to('cpu'), y.to('cpu')
         yhat = classeur_image(x)

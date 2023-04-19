@@ -1,10 +1,11 @@
 from substrateinterface import SubstrateInterface, Keypair
 from substrateinterface.exceptions import SubstrateRequestException
+import websocket
 
 def main():
     # Remplacez l'URL ci-dessous par l'URL de votre propre nœud Substrate ou par un fournisseur d'API externe
     substrate = SubstrateInterface(
-        url="wss://rpc.polkadot.io",
+        url="ws://127.0.0.1",
         ss58_format=0,
         type_registry_preset='polkadot'
     )

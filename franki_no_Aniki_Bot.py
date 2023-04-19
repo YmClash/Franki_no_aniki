@@ -96,7 +96,7 @@ async def on_message(message) :
 
 
     franki_no_aniki_channel : discord.TextChannel = client.get_channel(1091814990329172080)
-    if message.content.startswith("/dismoi"):
+    if message.content.startswith("!"):
         prompt = message.content[11:]
         response = await demande_gpt(prompt)
         await franki_no_aniki_channel.send(content=response)
