@@ -5,6 +5,9 @@ import logging
 import webbrowser
 import os
 import sys
+import sqlite3
+import random
+import secrets
 
 
 
@@ -19,17 +22,33 @@ def ip_adresse() :
 
 
 
-def create_connection():
+def create_connection_database():
 
     database =None;
     try:
         database = sqlite3.connect(':memory')
         print(sqlite3.version)
-    except Error as e:
+    except EOFError as e:
         print(e)
     finally:
         if database:
             database.close()
+
+
+
+def compare_list(liste1:list,liste2:list):
+    resultat = set(liste1) & set(liste2)
+    if len(resultat) > 0:
+        print(f'il ya {len(resultat)} Element communs : {resultat}')
+    else:
+        print(" Il n'ya pas d'element en commun ")
+
+
+
+numb_1 = [random.randint(1,10) for i in range(10)]
+numb_2 = [random.randint(1,10) for e in range(10)]
+
+compare_list(numb_1,numb_2)
 
 # from chatterbot import ChatBot
 # from chatterbot.trainers import ChatterBotCorpusTrainer

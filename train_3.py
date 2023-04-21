@@ -1,3 +1,6 @@
+import ran
+
+
 
 def get_output_size(input_size, kernel_size, stride=1, padding=0) :
     return (input_size - kernel_size + 2 * padding) // stride + 1

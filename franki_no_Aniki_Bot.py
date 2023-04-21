@@ -86,7 +86,7 @@ async def on_message(message) :
         quote = random.choice(quotes)
         await message.channel.send(str(quote))
 
-    if message.content.startswith('roll 1') :
+    if message.content.startswith('roll 1'):
         roll = random.randint(1, 6)
         await message.channel.send(str(roll))
 
