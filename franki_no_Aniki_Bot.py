@@ -13,13 +13,10 @@ import shoGun
 # This example requires the 'message_content' intent.
 load_dotenv()
 
-
 clee = os.getenv('DISCORD_API_KEY')
 
 intents = discord.Intents.default()
 intents.message_content = True
-
-
 
 client = discord.Client(intents=intents)
 
@@ -36,32 +33,32 @@ async def demande_gpt(prompt) :
         max_tokens=500,
         temperature=0.75,
         top_p=1.0,
-        #stop =4,
+        # stop =4,
         frequency_penalty=0.0,
-        presence_penalty= 0.6
+        presence_penalty=0.6
     )
 
     message = response.choices[0].message.content.strip()
     return message
 
 
-async def demande_image(prompt):
+async def demande_image(prompt) :
     response = openai.Image.create(
         prompt=prompt,
         n=1,
-        size = "1024x1024"
+        size="1024x1024"
     )
 
     image_url = response['data'][0]['url']
     return image_url
 
-        # #prompt=prompt,
-        # temperature=0.75,
-        # max_tokens=150,
-        # stop=None,
-        # #top_p=1,
-        # frequency_penalty=0.0,
-        # presence_penalty=0.6,
+    # #prompt=prompt,
+    # temperature=0.75,
+    # max_tokens=150,
+    # stop=None,
+    # #top_p=1,
+    # frequency_penalty=0.0,
+    # presence_penalty=0.6,
     # )
     # #
     # message = response.choices[0].message.content.strip()
@@ -86,7 +83,7 @@ async def on_message(message) :
         quote = random.choice(quotes)
         await message.channel.send(str(quote))
 
-    if message.content.startswith('roll 1'):
+    if message.content.startswith('roll 1') :
         roll = random.randint(1, 6)
         await message.channel.send(str(roll))
 
@@ -94,24 +91,23 @@ async def on_message(message) :
         text = lorem.sentence()
         await message.channel.send(str(text))
 
-
-    franki_no_aniki_channel : discord.TextChannel = client.get_channel(1091814990329172080)
-    if message.content.startswith("!"):
-        prompt = message.content[11:]
+    franki_no_aniki_channel: discord.TextChannel = client.get_channel(1091814990329172080)
+    if message.content.startswith("!") :
+        prompt = message.content[11 :]
         response = await demande_gpt(prompt)
         await franki_no_aniki_channel.send(content=response)
 
-    if message.content.startswith("/imagemoi"):
-        prompt= message.content[11:]
+    if message.content.startswith("/imagemoi") :
+        prompt = message.content[11 :]
         response = await demande_image(prompt)
         await franki_no_aniki_channel.send(content=response)
 
 
-
 @client.event
-async def on_member_join(member):
+async def on_member_join(member) :
     welcome_channel = client.get_channel(1072608076118630420)
     await welcome_channel.send(content=f'Welcome to the  Mo^sJams Cave {member.display_name} !')
+
 
 client.run(clee, log_level=logging.INFO)
 
