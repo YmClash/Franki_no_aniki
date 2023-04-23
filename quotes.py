@@ -104,12 +104,3 @@ Afro_quote_2 = [
     "Qui ne risque rien n'a rien.",
     ]
 
-
-
-resultat = set(Afro_quote_1) & set(Afro_quote_2)
-
-
-if len(resultat) > 0:
-    print(f'il ya {len(resultat)}, element commun : {resultat}')
-else:
-    print("il n'ya pas d'element commun ")

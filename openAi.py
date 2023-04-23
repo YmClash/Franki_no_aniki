@@ -14,7 +14,7 @@ while True :
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
-            {"role" : "system", "content" : "You are a helpful assistant."},
+            {"role" : "system", "content" : "Franki"},
             {"role" : "user", "content" : user_input}
         ],
         max_tokens=500,

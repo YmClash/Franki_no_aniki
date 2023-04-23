@@ -50,6 +50,9 @@ numb_2 = [random.randint(1,10) for e in range(10)]
 
 compare_list(numb_1,numb_2)
 
+
+
+
 # from chatterbot import ChatBot
 # from chatterbot.trainers import ChatterBotCorpusTrainer
 # #
