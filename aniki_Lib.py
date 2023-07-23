@@ -1,57 +1,49 @@
-import discord
-import requests
 import socket
 import logging
-import webbrowser
-import os
-import sys
 import sqlite3
 import random
 import secrets
 
-
-
 logging.basicConfig(level=logging.INFO)
 
+
+# fonction pour affiche son adresse ip
 def ip_adresse() :
     hostname = socket.gethostname()
     ip_adresse = socket.gethostbyname(hostname)
     print(f'votre adresse IP est : {ip_adresse}')
 
 
-
-
-
-def create_connection_database():
-
-    database =None;
-    try:
+# Cree et se connecte a une base de donnée sql
+def create_connection_database() :
+    database = None;
+    try :
         database = sqlite3.connect(':memory')
         print(sqlite3.version)
-    except EOFError as e:
+    except EOFError as e :
         print(e)
-    finally:
-        if database:
+    finally :
+        if database :
             database.close()
 
 
-
-def compare_list(liste1:list,liste2:list):
+# fonction pour comparer 2 liste enfin de trouver des elements en commun
+def compare_list(liste1: list, liste2: list) :
     resultat = set(liste1) & set(liste2)
-    if len(resultat) > 0:
+    if len(resultat) > 0 :
         print(f'il ya {len(resultat)} Element communs : {resultat}')
-    else:
+    else :
         print(" Il n'ya pas d'element en commun ")
 
 
 
-numb_1 = [random.randint(1,10) for i in range(10)]
-numb_2 = [random.randint(1,10) for e in range(10)]
 
-compare_list(numb_1,numb_2)
+#test
 
+numb_1 = [random.randint(1, 10) for i in range(10)]
+numb_2 = [random.randint(1, 10) for e in range(10)]
 
-
+compare_list(numb_1, numb_2)
 
 # from chatterbot import ChatBot
 # from chatterbot.trainers import ChatterBotCorpusTrainer

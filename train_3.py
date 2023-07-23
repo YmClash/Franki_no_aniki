@@ -1,4 +1,3 @@
-import ran
 
 
 
@@ -7,7 +6,7 @@ def get_output_size(input_size, kernel_size, stride=1, padding=0) :
 
 
 
-input_size = 100
+input_size = 128
 output_size = get_output_size(input_size, kernel_size=3)  # Conv1
 print(f"Output size after conv layers: {output_size}")
 output_size = get_output_size(output_size, kernel_size=3)  # Conv2

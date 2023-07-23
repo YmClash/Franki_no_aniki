@@ -28,10 +28,19 @@ def get_output_size(input_size, kernel_size, stride=1, padding=0) :
     return (input_size - kernel_size + 2 * padding) // stride + 1
 
 
-input_size = 28
-output_size = get_output_size(input_size, kernel_size=3)  # Conv1
-output_size = get_output_size(output_size, kernel_size=3)  # Conv2
-output_size = get_output_size(output_size, kernel_size=5)  # Conv3
-output_size = get_output_size(output_size, kernel_size=5)  # Conv4
-
-print(f"Output size after conv layers: {output_size}")
+def output_size(input):
+    input_size = input
+    output_size = get_output_size(input_size,kernel_size=3)
+    output_size = get_output_size(input_size,kernel_size=3)
+    output_size = get_output_size(input_size,kernel_size=3)
+    output_size = get_output_size(input_size,kernel_size=3)
+    print(f'Output size afer conv Layers: {output_size}')
+#
+# input_size = 28
+# output_size = get_output_size(input_size, kernel_size=3)  # Conv1
+# output_size = get_output_size(output_size, kernel_size=3)  # Conv2
+# output_size = get_output_size(output_size, kernel_size=5)  # Conv3
+# output_size = get_output_size(output_size, kernel_size=5)  # Conv4
+#
+# print(f"Output size after conv layers: {output_size}")
+output_size(175)
