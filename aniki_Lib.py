@@ -25,6 +25,7 @@ def create_connection_database() :
     finally :
         if database :
             database.close()
+    return database
 
 
 # fonction pour comparer 2 liste enfin de trouver des elements en commun

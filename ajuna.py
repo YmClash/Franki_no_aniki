@@ -6,7 +6,7 @@ def main():
     # Remplacez l'URL ci-dessous par l'URL de votre propre nœud Substrate ou par un fournisseur d'API externe
     substrate = SubstrateInterface(
         url="ws://127.0.0.1",
-        ss58_format=0,
+        # ss58_format=0,bUMsHd1kdadt9dLLBwwbUARrTDsbxbWk779Amo9RfuyhpRdRo
         type_registry_preset='polkadot'
     )
 
